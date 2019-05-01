@@ -1,11 +1,10 @@
 function join(str, concatStr) {
-  let AfterJoin = '';
-  for (let i = 0; i < str.length; i += 1) {
-    AfterJoin += str[i];
-    AfterJoin += concatStr;
+  let afterJoin = '';
+  for (let i = 0; i < (str.length - 1); i += 1) {
+    afterJoin += str[i] + concatStr;
   }
-  AfterJoin = AfterJoin.substring(0, AfterJoin.length - 1);
-  return AfterJoin;
+  afterJoin += str[str.length - 1];
+  return afterJoin;
 }
 
 function repeat(str, times) {
@@ -16,5 +15,5 @@ function repeat(str, times) {
   return timeStr;
 }
 
-console.log(join(['a', 1, 'b', 2, 'c', 3], ','));
+console.log(join(['a', 'b', 'c'], ',,,'));
 console.log(repeat('yo', 5));
