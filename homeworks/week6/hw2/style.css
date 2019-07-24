@@ -1,0 +1,51 @@
+.title {
+	margin-left: 100px;
+	margin-right: 100px;
+	margin-top: 50px;
+	font-size: 35px;
+}
+
+.article {
+	margin-left: 100px; 
+	margin-right: 100px;
+	margin-top: 50px;
+	font-size: 17px;
+}
+
+.clapping {
+	position: fixed;
+	top: 200px;
+	left: 30px;
+}
+
+.clapping:hover {
+	cursor: pointer;
+}
+
+.clapping__number {
+	font-size: 15px;
+	text-align: center;
+}
+
+.clapping__photo {
+	width: 25px;
+	height: 25px;
+}
+
+@media only screen and (max-width: 550px) {
+	.title {
+		font-size: 38px;
+		margin-left: 50px;
+		margin-right: 50px;
+	}
+
+	.article {
+		font-size: 20px;
+		margin-left: 50px;
+		margin-right: 50px;
+	}
+
+	.clapping {
+		display: none;
+	}
+}
