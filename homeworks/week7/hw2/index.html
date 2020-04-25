@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>HW2</title>
+	<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+	<div class="container">
+		<div class="container__banner"></div>
+		<form class="form">
+			<div class="form__header">
+				<div class="header__title">從零到一：程式導師實驗計畫報名表單</div>
+				<div class="header__content">
+					<p>詳情請參考：<a href="https://medium.com/@hulitw/mentor-program-b5f96ae1eed1">https://medium.com/@hulitw/mentor-program-b5f96ae1eed1</a><br>
+					<span>記得填完表單之後還要寫信報名才算成功，兩者缺一不可！</span></p>
+					<div class="keypoint">*必填</div>
+				</div>
+			</div>
+			<div class="form__body">
+				<div class="body__section must">
+					<div class="question">電子郵件地址<span class="keypoint">*</span></div>
+					<input class="answer" type="email" name="email" placeholder="你的電子郵件"/>
+					<div class="keypoint1 hidden">這是必填問題</div>
+				</div>
+				<div class="body__section must">
+					<div class="question">暱稱<span class="keypoint">*</span></div>
+					<div class="description">該怎麼稱呼你</div>
+					<input class="answer" type="name" name="name" placeholder="你的回答"/>
+					<div class="keypoint1 hidden">這是必填問題</div>
+				</div>
+				<div class="body__section must1">
+					<div class="question">報名類型<span class="keypoint">*</span></div>
+					<label><input id="type1" type="radio" name="type" value="基礎班"/>工程師培養班（每週付出四十小時，從零培養到工程師，學費是一個月薪水）</label><br>
+					<label><input id="type2" type="radio" name="type" value="業餘班"/>業餘班（依照個人目標訂立學習計畫，學費一萬五千元）</label>
+					<div class="keypoint2 noshow">這是必填問題</div>
+				</div>
+				<div class="body__section must">
+					<div class="question">現在的職業<span class="keypoint">*</span></div>
+					<div class="description">範例：學生、前端工程師、待業中、業務</div>
+					<input class="answer" type="text" placeholder="你的回答"/>
+					<div class="keypoint1 hidden">這是必填問題</div>
+				</div>
+				<div class="body__section must">
+					<div class="question">怎麼知道這個計畫的<span class="keypoint">*</span></div>
+					<input class="answer" type="text" placeholder="你的回答"/>
+					<div class="keypoint1 hidden">這是必填問題</div>
+				</div>
+				<div class="body__section must">
+					<div class="question">是否有程式相關背景？<span class="keypoint">*</span></div>
+					<div class="description">範例：無、高中時候學過C++、學過一點網頁前端、目前在資策會上課...</div>
+					<input class="answer" type="text" placeholder="你的回答"/>
+					<div class="keypoint1 hidden">這是必填問題</div>
+				</div>
+				<div class="body__section">
+					<div class="question">其他</div>
+					<div class="description">其他任何你想講的</div>
+					<input class="others" type="text" placeholder="你的回答"/>
+				</div>
+				<div class="form__btn">
+					<button class="btn" onclick="return false">提交</button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<script src="./index.js"></script>
+</body>
+</html>
