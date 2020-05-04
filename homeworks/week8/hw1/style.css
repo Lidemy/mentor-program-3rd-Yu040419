@@ -1,0 +1,42 @@
+body {
+    margin: 0px auto;
+    height: 100%;
+    padding: 0px;
+    background-color: white;
+}
+.wrap {
+    font-family: 微軟正黑體;
+    flex-direction: column;
+}
+.name {
+    margin-top: 50px;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+}
+.btn {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+.hidden {
+    display: none;
+}
+.pic {
+    background: no-repeat center center;
+    background-size: cover;
+    height: 200px;
+    width: 300px;
+    border: none;
+    position: absolute;
+    top: 160px;
+    left: 50%;
+    transform: translate(-50%);
+}
+.prize__name {
+    font-size: 16px;
+    position: absolute;
+    top: 400px;
+    left: 50%;
+    transform: translate(-50%);
+}
