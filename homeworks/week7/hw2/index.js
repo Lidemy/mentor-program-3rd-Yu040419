@@ -59,12 +59,15 @@ btn.addEventListener('click', () => {
 });
 
 for (let i = 0; i < answer.length; i += 1) {
-  answer[i].addEventListener('blur', () => {
-    checkInput();
-  });
-}
-for (let i = 0; i < type.length; i += 1) {
-  type[i].addEventListener('blur', () => {
-    checkInput();
+  answer[i].addEventListener('blur', (e) => {
+    if (e.target.value === '') {
+      e.target.parentNode.classList.add('warning');
+      e.target.classList.add('error');
+      e.target.parentNode.lastChild.classList.remove('hidden');
+    } else {
+      e.target.parentNode.classList.remove('warning');
+      e.target.classList.remove('error');
+      e.target.parentNode.lastChild.classList.add('hidden');
+    }
   });
 }

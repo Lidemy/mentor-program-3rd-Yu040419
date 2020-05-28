@@ -8,14 +8,11 @@ let resultTime = 0;
 const htmlSelector = document.querySelector('html');
 
 function addBtn() {
-  const newBtn = document.createElement('button');
-  newBtn.setAttribute('type', 'button');
-  newBtn.classList.add('btn');
-  newBtn.innerText = '再玩一次';
-  document.querySelector('body').appendChild(newBtn);
+  const newBtn = document.querySelector('.btn');
+  newBtn.style.display = 'block';
   newBtn.addEventListener('click', () => {
     document.location.reload();
-    newBtn.setAttribute('display', 'none');
+    newBtn.style.display = 'none';
   });
 }
 
