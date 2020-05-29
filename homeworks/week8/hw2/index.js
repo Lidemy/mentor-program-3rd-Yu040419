@@ -13,43 +13,43 @@ const createDiv = () => {
     <div class="old__text"></div>`;
 };
 
-const loadComt = () => {
+const loadComment = () => {
   const json = JSON.parse(request.responseText);
-  const comtArr = json.map(item => Object.values(item)[1]);// 將第一個物件的 value 轉成陣列
+  const commentArr = json.map(item => Object.values(item)[1]);// 將第一個物件的 value 轉成陣列
   const idArr = json.map(item => Object.values(item)[0]);// 將第零個物件的 value 轉成陣列
-  for (let i = 0; i < comtArr.length; i += 1) {
+  for (let i = 0; i < commentArr.length; i += 1) {
     createDiv();
     const oldId = document.querySelectorAll('.old__id');
     const oldText = document.querySelectorAll('.old__text');
     oldId[0].innerText = idArr[i];
-    oldText[0].innerText = comtArr[i];
+    oldText[0].innerText = commentArr[i];
   }
 };
 
 request.open('GET', 'https://lidemy-book-store.herokuapp.com/posts?_limit=20');
 request.onload = () => {
   if (request.status >= 200 && request.status < 400) {
-    loadComt();
+    loadComment();
   } else {
     alert('系統不穩定，請再試一次');
   }
 };
 request.send();
 
-const getNewComt = () => {
+const getNewComment = () => {
   request.open('GET', 'https://lidemy-book-store.herokuapp.com/posts?_limit=20');
   request.onload = () => {
     if (request.status >= 200 && request.status < 400) {
       const json = JSON.parse(request.responseText);
-      const comtArr = json.map(item => Object.values(item)[1]);
-      const newComt = comtArr[comtArr.length - 1];
+      const commentArr = json.map(item => Object.values(item)[1]);
+      const newComment = commentArr[commentArr.length - 1];
       const idArr = json.map(item => Object.values(item)[0]);
       const newName = idArr[idArr.length - 1];
       createDiv();
       const oldId = document.querySelectorAll('.old__id');
       const oldText = document.querySelectorAll('.old__text');
       oldId[0].innerText = newName;
-      oldText[0].innerText = newComt;
+      oldText[0].innerText = newComment;
     } else {
       alert('系統不穩定，請再試一次');
     }
@@ -67,7 +67,7 @@ btn.onclick = () => {
     request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=UTF-8');
     request.onload = () => {
       if (request.status >= 200 && request.readyState === 4) {
-        getNewComt();
+        getNewComment();
         newId.value = '';
         newText.value = '';
       } else {
