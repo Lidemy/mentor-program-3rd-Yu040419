@@ -17,7 +17,6 @@ require_once('utils.php');
 		<nav class="navbar">
 			<div>
 				<a class="navbar__title" href="./index.php" >FeiWen</a>
-				<span class="navbar__slogan">我最廢</span>
 			</div>
 			<div class="navbar__member">
 			<?php
@@ -38,7 +37,7 @@ require_once('utils.php');
 				$nickname = $user['nickname'];
 			?>
 				<a class='navbar__member--name' href='./profile.php'><?php echo escape($nickname) ?></a>
-				<a class='navbar__member--logout' href='./logout.php' >登出</a>
+				<a class='navbar__member--logout' href='./handle_logout.php' >登出</a>
 			</div>
 		</nav>
 		<div class='my__profile'>
