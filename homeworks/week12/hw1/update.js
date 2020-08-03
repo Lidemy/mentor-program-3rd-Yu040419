@@ -28,7 +28,7 @@ btn.addEventListener('click', (e) => {
 
     // JS escape from: https://stackoverflow.com/questions/1787322/htmlspecialchars-equivalent-in-javascript/4835406#4835406
 
-    escape = function (word) {
+    escape = (word) => {
       const map = {
         '&': '&amp;',
         '<': '&lt;',
