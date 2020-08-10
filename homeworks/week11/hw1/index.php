@@ -17,7 +17,6 @@ require_once('utils.php');
 		<nav class="navbar">
 			<div>
 				<a class="navbar__title" href="./index.php" >FeiWen</a>
-				<span class="navbar__slogan">我最廢</span>
 			</div>
 			<div class="navbar__member">
 			<?php
@@ -29,12 +28,12 @@ require_once('utils.php');
 				$username = $user['username'];
 				
 				echo 	    	"<a class='navbar__member--name' href='./profile.php'>" . escape($nickname) . "</a>";
-				echo      	"<a class='navbar__member--logout' href='./logout.php' >登出</a>";
+				echo      	"<a class='navbar__member--logout' href='./handle_logout.php' >登出</a>";
 				echo     "</div>";
 				echo   "</nav>";
 				echo   "<div class='new__comment'>";
 				echo     "<div class='new__comment--name'>" . escape($nickname) . "</div>";
-				echo     "<form class='new__comment--block' action='./add.php' method='POST' >";
+				echo     "<form class='new__comment--block' action='./handle_add.php' method='POST' >";
 				echo       "<textarea name='text' class='new__comment--text' placeholder='輸入您的廢文' required></textarea>";
 				echo	     "<input type='submit' class='btn' value='送出' />";
 				echo     "</form>";
