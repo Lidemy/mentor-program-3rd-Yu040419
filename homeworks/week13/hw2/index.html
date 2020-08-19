@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Todo List</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+	<link rel="stylesheet" href="CSS/normalize.css">
+	<link rel="stylesheet" href="CSS/style.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js" integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="row justify-content-md-center">
+			<div class="col-md-8">
+				<h1 class="title text-center">Todos</h1>
+				<div>
+					<div class="todo__input input-group input-group-sm mb-3">
+						<input class="todo__inputbox form-control" value="" type="text" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="write todos down...">
+						<i class="todo__add material-icons" title="add todo item" style="font-size: 33px;">playlist_add</i>
+					</div>
+				</div>
+			</div>
+			<div class="todo__block col-md-8">
+				<div class="input-group mb-3">
+					<div class="todo__list input-group-text">
+						<div class="todo__row">
+							<input class="todo__box" type="checkbox" checked/>
+							<span class="todo__item checked">check emails</span>
+						</div>
+						<i class="todo__delete material-icons" title="delete">clear</i>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="./index.js"></script>
+</body>
+</html>
