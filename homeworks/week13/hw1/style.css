@@ -1,0 +1,89 @@
+html, body {
+    margin: 0px;
+    padding: 0px;
+}
+* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.container {
+    max-width: 960px;
+    display: flex;
+    flex-direction: column;
+}
+.row {
+    background-color: lightblue;
+    width: 100%;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+.fixed {
+    padding: 10px;
+}
+.col-1, .col-2, .col-3, .col-4,
+.col-5, .col-6, .col-7, .col-8,
+.col-9, .col-10, .col-11, .col-12 {
+    background-color: white;
+    border: solid 1px lightblue;
+    color: lightskyblue;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (min-width: 992px) {
+    .col-1 {
+        width: 8.333333%;
+    }
+    .col-5 {
+        width: 41.666666%;
+    }
+    .col-7 {
+        width: 58.333333%;
+    }
+    .col-8 {
+        width: 66.666666%;
+    }
+    .col-9 {
+        width: 75%;
+    }
+    .col-10 {
+        width: 83.333333%;
+    }
+    .col-11 {
+        width: 91.666666%;
+    }
+}
+@media screen and (max-width: 991px) {
+    .col-2 {
+        width: 16.666666%;
+    }
+}
+@media screen and (max-width: 910px) {
+    .col-3 {
+        width: 25%;
+    }
+}
+@media screen and (max-width: 830px) {
+    .col-4 {
+        width: 33.333333%;
+    }
+}
+@media screen and (max-width: 760px) {
+    .col-6 {
+        width: 50%;
+    }
+}
+@media screen and (max-width: 720px) {
+    .col-12 {
+        width: 100%;
+    }
+}
