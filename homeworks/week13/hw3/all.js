@@ -43,10 +43,7 @@ function getComment(nickname, username, id, time, text) {
 
 // 子留言
 function getSubComment(nickname, username, parentUsername, id, time, text) {
-  function checkAuthor() {
-    return (username === parentUsername) ? '<span class="origin" >樓主</span>' : '';
-  }
-  const author = checkAuthor();
+  const author = (username === parentUsername) ? '<span class="origin" >樓主</span>' : '';
 
   const subComment = `
     <div class='subcomment__block'>
@@ -92,8 +89,8 @@ function getNewText(className, id, text) {
 }
 
 // 編輯暱稱或帳號
-function getNewData(className, data) {
-  if (className === 'my__nickname--update') {
+function getNewData(name, data) {
+  if (name === 'nickname') {
     const newNickname = `
       <div class='my__profile--nickname'>暱稱：
         <span name='nickname' class='my__profile--update--nickname'>${escapeHtml(data)}
@@ -252,7 +249,7 @@ $(document).ready(() => {
       // 編輯暱稱或帳號
     } else if (target.hasClass('nickname__btn') || target.hasClass('username__btn')) {
       const newData = target.prev().val();
-      const className = target.parent().attr('class');
+      const name = target.prev().attr('name');
 
       if (newData === '') {
         alert('請輸入欲修改的內容！');
@@ -261,12 +258,12 @@ $(document).ready(() => {
           method: 'POST',
           url: 'handle_update.php',
           data: {
-            className,
+            name,
             newData,
           },
         }).done((resp) => {
           const msg = JSON.parse(resp);
-          const newDataBlock = getNewData(className, newData);
+          const newDataBlock = getNewData(name, newData);
           alert(msg.message);
           if (msg.result === 'success') {
             target.prev().val('');

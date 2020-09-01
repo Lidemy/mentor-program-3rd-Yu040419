@@ -10,7 +10,7 @@
 	$nickname = $user['nickname'];
 
 	// 更改暱稱
-	if (!empty($_POST["newData"]) && ($_POST["className"] === 'my__nickname--update')) {
+	if (!empty($_POST["newData"]) && ($_POST["name"] === 'nickname')) {
 		$nickname = $_POST["newData"];
 		$sql = "UPDATE yu_users SET nickname = ? WHERE username = ?";
 		$stmt = $conn->prepare($sql);
@@ -22,15 +22,16 @@
 				'result' => 'failed',
 				'message' => '暱稱編輯失敗，請稍後再試一次'
 			));
-		} else if ($result) {
-			echo json_encode(array(
-				'result' => 'success',
-				'message' => '暱稱編輯成功'
-			));
+			exit();
 		}
+
+		echo json_encode(array(
+			'result' => 'success',
+			'message' => '暱稱編輯成功'
+		));
 		
 	// 更改帳號
-	} else if (!empty($_POST["newData"]) && ($_POST["className"] === 'my__username--update')) {
+	} else if (!empty($_POST["newData"]) && ($_POST["name"] === 'username')) {
 		$new_username = $_POST["newData"];
 		$sql = "UPDATE yu_users SET username = ? WHERE username = ?";
 		$stmt = $conn->prepare($sql);
@@ -72,36 +73,40 @@
 				'result' => 'failed',
 				'message' => '密碼更新失敗，請稍後再試一次'
 			));
+			exit();
 		}
 	
 		$result = $stmt->get_result();
 		$row = $result->fetch_assoc();
 
-		// 如果舊密碼驗證成功
-		if (password_verify($old_password, $row['password'])) {
-			$sql = "UPDATE yu_users SET password = ? WHERE username = ?";
-			$stmt = $conn->prepare($sql);
-			$stmt->bind_param('ss', $new_password, $username);
-			$result = $stmt->execute();
-
-			if (!$result) {
-				echo json_encode(array(
-					'result' => 'failed',
-					'message' => '密碼更新失敗，請稍後再試一次'
-				));
-			} else {
-				echo json_encode(array(
-					'result' => 'success',
-					'message' => '密碼更新成功'
-				));
-			}
-		} else {
+		// 如果舊密碼驗證失敗
+		if (!password_verify($old_password, $row['password'])) {
 			echo json_encode(array(
 				'result' => 'failed',
 				'message' => '舊密碼輸入錯誤'
 			));
+			exit();
 		}
-		
+
+		// 如果舊密碼驗證成功
+		$sql = "UPDATE yu_users SET password = ? WHERE username = ?";
+		$stmt = $conn->prepare($sql);
+		$stmt->bind_param('ss', $new_password, $username);
+		$result = $stmt->execute();
+
+		if (!$result) {
+			echo json_encode(array(
+				'result' => 'failed',
+				'message' => '密碼更新失敗，請稍後再試一次'
+			));
+			exit();
+		}
+
+		echo json_encode(array(
+			'result' => 'success',
+			'message' => '密碼更新成功'
+		));
+
 	// 編輯留言
 	} else if (!empty($_POST["newText"])) {
 		$new_text = $_POST["newText"];
@@ -116,12 +121,13 @@
 				'result' => 'failed',
 				'message' => '編輯失敗'
 			));
-		} else if ($result) {
-			echo json_encode(array(
-				'result' => 'success',
-				'message' => '編輯成功'
-			));
-		}
+			exit();
+		} 
+
+		echo json_encode(array(
+			'result' => 'success',
+			'message' => '編輯成功'
+		));
 
 	}
 
