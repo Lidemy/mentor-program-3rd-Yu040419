@@ -43,10 +43,7 @@ function getComment(nickname, username, id, time, text) {
 
 // 子留言
 function getSubComment(nickname, username, parentUsername, id, time, text) {
-  function checkAuthor() {
-    return (username === parentUsername) ? '<span class="origin" >樓主</span>' : '';
-  }
-  const author = checkAuthor();
+  const author = (username === parentUsername) ? '<span class="origin" >樓主</span>' : '';
 
   const subComment = `
     <div class='subcomment__block'>
@@ -92,8 +89,8 @@ function getNewText(className, id, text) {
 }
 
 // 編輯暱稱或帳號
-function getNewData(className, data) {
-  if (className === 'my__nickname--update') {
+function getNewData(name, data) {
+  if (name === 'nickname') {
     const newNickname = `
       <div class='my__profile--nickname'>暱稱：
         <span name='nickname' class='my__profile--update--nickname'>${escapeHtml(data)}
@@ -131,6 +128,49 @@ $(document).ready(() => {
     showUpdateForm('nickname');
     showUpdateForm('username');
     showUpdateForm('password');
+
+    // 登入或註冊
+    function member(action) {
+      const username = target.parent().find('input[name="username"]').val();
+      const password = target.parent().find('input[name="password"]').val();
+
+      let nickname = null;
+      if (action === 'register') {
+        nickname = target.parent().find('input[name="nickname"]').val();
+        if (nickname === '') {
+          $(`.${action}__err`).remove();
+          $(`<div class="${action}__err">請完整輸入欄位資訊</div>`).insertAfter(`.${action}__title`);
+        }
+      }
+
+      if (username === '' || password === '') {
+        $(`.${action}__err`).remove();
+        $(`<div class="${action}__err">請完整輸入欄位資訊</div>`).insertAfter(`.${action}__title`);
+      } else {
+        $.ajax({
+          method: 'POST',
+          url: `handle_${action}.php`,
+          data: {
+            nickname,
+            username,
+            password,
+          },
+        }).done((resp) => {
+          const msg = JSON.parse(resp);
+          if (msg.OK) {
+            $(`.${action}__err`).remove();
+            window.location.href = 'index.php';
+          } else {
+            $(`.${action}__err`).remove();
+            $(`<div class="${action}__err">${msg.message}</div>`).insertAfter(`.${action}__title`);
+          }
+        }).fail((resp) => {
+          const msg = JSON.parse(resp);
+          $(`.${action}__err`).remove();
+          $(`<div class="${action}__err">${msg.message}</div>`).insertAfter(`.${action}__title`);
+        });
+      }
+    }
 
     // 編輯留言介面
     if (target.hasClass('comment__edit')) {
@@ -252,7 +292,7 @@ $(document).ready(() => {
       // 編輯暱稱或帳號
     } else if (target.hasClass('nickname__btn') || target.hasClass('username__btn')) {
       const newData = target.prev().val();
-      const className = target.parent().attr('class');
+      const name = target.prev().attr('name');
 
       if (newData === '') {
         alert('請輸入欲修改的內容！');
@@ -261,12 +301,12 @@ $(document).ready(() => {
           method: 'POST',
           url: 'handle_update.php',
           data: {
-            className,
+            name,
             newData,
           },
         }).done((resp) => {
           const msg = JSON.parse(resp);
-          const newDataBlock = getNewData(className, newData);
+          const newDataBlock = getNewData(name, newData);
           alert(msg.message);
           if (msg.result === 'success') {
             target.prev().val('');
@@ -278,6 +318,8 @@ $(document).ready(() => {
           alert('帳號編輯失敗，請稍後再試一次');
         });
       }
+
+      // 編輯密碼
     } else if (target.hasClass('password__btn')) {
       const currentPassword = target.parent().children().eq(0).val();
       const newPassword = target.parent().children().eq(1).val();
@@ -310,6 +352,14 @@ $(document).ready(() => {
           alert(msg.message);
         });
       }
+
+      // 登入
+    } else if (target.hasClass('login__btn')) {
+      member('login');
+
+      // 註冊
+    } else if (target.hasClass('register__btn')) {
+      member('register');
     }
   });
 });
