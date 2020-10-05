@@ -1,5 +1,4 @@
 let edit = true;
-let isLogin;
 // escapeHtml from: https://stackoverflow.com/questions/24816/escaping-html-strings-with-jquery
 
 function escapeHtml(str) {
@@ -406,7 +405,7 @@ $(document).ready(() => {
       member('register');
 
       // 已登入並按讚
-    } else if (isLogin && target.hasClass('like')) {
+    } else if (target.hasClass('like')) {
       target.toggleClass('hidden');
       target.next().toggleClass('hidden');
       const commentId = target.parent().prev().attr('data-id');
@@ -428,8 +427,8 @@ $(document).ready(() => {
         alert('按讚失敗，請稍後再試一次');
       });
 
-      // 已登入並退讚
-    } else if (isLogin && target.hasClass('liked__heart')) {
+      // 退讚
+    } else if (target.hasClass('liked__heart')) {
       target.parent().toggleClass('hidden');
       target.parent().prev().toggleClass('hidden');
       const commentId = target.parent().parent().prev().attr('data-id');
@@ -455,11 +454,4 @@ $(document).ready(() => {
       });
     }
   });
-
-  // 未登入時想按讚，會出現登入才能按讚的提示框
-  if (!isLogin) {
-    $('.like').hover(() => {
-      $('[data-toggle="tooltip"]').tooltip();
-    });
-  }
 });

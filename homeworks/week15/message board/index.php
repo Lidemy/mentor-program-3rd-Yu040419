@@ -134,7 +134,21 @@ session_start();
       </div>
     </div>
   </div>
-  <script>let isLogin = <?php echo empty($_SESSION['username']) ? 'false' : 'true' ?></script>
-  <script src="JS/all.js"></script>
+  <?php
+    // 登入的話引入 all.js
+    if (!empty($_SESSION['username'])) { ?>
+      <script src='JS/all.js'></script>
+      <?php
+    }
+  ?>
+  <script>
+    const isLogin = <?php echo empty($_SESSION['username']) ? 'false' : 'true' ?>
+    // 未登入時想按讚，會出現登入才能按讚的提示框
+    if (!isLogin) {
+      $('.like').hover(() => {
+        $('[data-toggle="tooltip"]').tooltip();
+      });
+    }
+  </script>
 </body>
 </html>
