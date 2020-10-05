@@ -1,7 +1,7 @@
 <?php
-session_start();
 require_once('conn.php');
 include_once('utils.php');
+session_start();
 ?>
 <!DOCTYPE html>
 
@@ -20,29 +20,40 @@ include_once('utils.php');
   <div class="wrap">
 
     <?php
+      //導覽列
       include_once('templates/navbar.php');
     ?>  
     <div class="container">
       <div class='row d-flex justify-content-center'>
         <div class='new__comment col-md-9 mt-2'>
+
         <?php
+
+          // 沒有登入的話顯示提示文字
           if (empty($_SESSION['username'])) { ?>
             <div>登入後即可發布您的廢文</div>
+
           <?php
+          // 登入顯示使用者暱稱
           } else { ?>
             <div class='new__comment--name'><?php echo escape($nickname) ?></div>
           <?php
           } ?>
+
+          <!-- 新增留言表格 -->
           <form class='new__comment--block' action='./handle_add_comment.php' method='POST' >
             <textarea name='text' class='new__comment--text' placeholder='輸入您的廢文' required></textarea>
             <input type='hidden' name='parent_id' value='0'/>
+
             <?php
+              // 未登入顯示登入及註冊按鈕
               if (empty($_SESSION['username'])) { ?>
                 <div class='mt-2'>
                   <a href="./login.php" class='button mt-2'>我要登入</a>
                   <a href="./register.php" class='button mt-2 ml-2'>我要註冊</a>
                 </div>
-              <?php
+                <?php
+                // 登入顯示送出留言按鈕 
               } else { ?>
                 <input type='button' class='button add__comment mt-2' value='送出' />
               <?php
@@ -53,6 +64,7 @@ include_once('utils.php');
       <div class="latest">LATEST FEI WEN</div>
       <div class="comment mb-4 row d-flex justify-content-center">
         <?php
+          // 按照頁數及每頁的留言數取得留言
           $page = 1;
           if (!empty($_GET['page'])) {
             $page = intval($_GET['page']);
@@ -81,7 +93,7 @@ include_once('utils.php');
         ?>
       </div>
       <div class='page'>
-
+      <!-- 分頁功能 -->
       <?php
         $sql = "SELECT COUNT(comm_id) AS total, C.is_deleted 
           FROM yu_users AS U JOIN yu_comments AS C ON U.id = C.user_id
@@ -99,6 +111,7 @@ include_once('utils.php');
         $total_comments = $row['total'];
         $total_pages = ceil($total_comments / $comments_per_page);
 
+        // 如果現在頁數不是第一頁，印出上一頁的按鈕
         if ($page != 1) { ?>
           <a href='index.php?page=<?php echo $page - 1 ?>' class='page__btn'>上一頁</a>
           <?php	
@@ -121,14 +134,7 @@ include_once('utils.php');
       </div>
     </div>
   </div>
-  <?php
-  if (empty($_SESSION['username'])) { ?>
-    <script src="JS/visitor.js"></script>
-  <?php
-  } else { ?>
-    <script src="JS/all.js"></script>
-  <?php
-  }
-  ?>
+  <script>let isLogin = <?php echo empty($_SESSION['username']) ? 'false' : 'true' ?></script>
+  <script src="JS/all.js"></script>
 </body>
 </html>
