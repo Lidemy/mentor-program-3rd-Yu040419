@@ -5,6 +5,15 @@
 
   $comment_id = $_POST['commentId'];
 
+  // 如果沒有登入
+  if (empty($_SESSION['username'])) {
+    echo json_encode(array(
+      'message' => '請登入',
+      'OK' => false,
+    ));
+    exit();
+  }
+
   // get user id
   $username = $_SESSION['username'];
   $user = getUserFromUsername($username);

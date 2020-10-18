@@ -1,5 +1,4 @@
 let edit = true;
-
 // escapeHtml from: https://stackoverflow.com/questions/24816/escaping-html-strings-with-jquery
 
 function escapeHtml(str) {
@@ -25,7 +24,7 @@ function getComment(username, id, time, text) {
         <div class='card-body'>
           <div class='comment__block--info mb-1 d-flex justify-content-between align-items-center'>
             <div class='d-flex align-items-center'>
-              <span class='mb-0 card-title h5 comment__username'>${escapeHtml(username)}</span>
+              <span class='mb-0 card-title comment__username'>${escapeHtml(username)}</span>
             </div>
             <div class='dropdown dropleft'>
               <button class='btn btn-sm dropdown-toggle' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'></button>
@@ -66,7 +65,7 @@ function getSubComment(username, parentUsername, parentId, id, time, text) {
     <div class='subcomment__block'>
       <div class='subcomment__block--info mb-1 d-flex justify-content-between align-items-center'>
         <div class='d-flex align-items-center'>
-          <span class='mb-0 card-title h6'>${escapeHtml(username)}</span>
+          <span class='mb-0 card-title subcomment__username'>${escapeHtml(username)}</span>
           ${author}
         </div>
         <div class='dropdown dropleft'>
@@ -405,7 +404,7 @@ $(document).ready(() => {
     } else if (target.hasClass('register__btn')) {
       member('register');
 
-      // 按讚
+      // 已登入並按讚
     } else if (target.hasClass('like')) {
       target.toggleClass('hidden');
       target.next().toggleClass('hidden');
