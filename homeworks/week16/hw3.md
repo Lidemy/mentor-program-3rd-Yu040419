@@ -3,7 +3,7 @@
 
 快取剛開始其實指的是硬體的 CPU 快取，後來衍伸出只要是類似可快速存取的應用，就可被稱為快取。其中包含但不限於網頁 Client-side 及 Server-side 的快取，以及 Proxy Server 代理伺服器的快取。
 ## Client-side Cache
-前端相關的快取也被稱為 HTTP Caching，都跟瀏覽器相關。
+前端相關的快取有很多種，這裡介紹的快取因為建立在 HTTP 運輸協定，因此也被稱為 HTTP Caching，都跟瀏覽器相關。
 ### 種類
 依照快取優先順序分為以下四種：
 1. Memory Cache：
@@ -38,7 +38,7 @@
 ![](https://i.imgur.com/RHGoIVt.png)
 [圖片來源](https://web.dev/service-worker-caching-and-http-caching/)
 ### 使用設定
-Client-Side 的快取都是透過 Server 端的 HTTP Response Headers 來設定，所以其實只要 Server 端寫好設定，瀏覽器就會自動依照設定做相對應的運作。以下依照三種概念區分，分別是使用與否、有效期限及驗證。
+HTTP Caching 除了 Service Worker 之外，其他都是透過 Server 端的 HTTP Response Headers 來設定，所以其實只要 Server 端寫好設定，瀏覽器就會自動依照設定做相對應的運作。以下設定方式是針對 Memory Cache 及 Desk Cache，並依照三種概念區分，分別是使用與否、有效期限及驗證。
 #### 使用與否
 * 不要使用：
     * `Cache-Control: no-store`：每次都發 request 到 Server 請求檔案
