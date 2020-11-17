@@ -1,0 +1,2 @@
+/* eslint-disable */
+(()=>{var r={555:r=>{r.exports=(r,o)=>r+o}},o={};function t(e){if(o[e])return o[e].exports;var s=o[e]={exports:{}};return r[e](s,s.exports,t),s.exports}(()=>{const r=t(555);console.log(r(10,3))})()})();
